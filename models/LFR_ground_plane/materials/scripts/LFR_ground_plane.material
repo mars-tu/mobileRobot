@@ -1,0 +1,19 @@
+ material LFR_ground_plane/Image
+    {
+      technique
+      {
+        pass
+        {
+          ambient 1 1 1 1.0
+          diffuse 1.0 1.0 1.0 1.0
+          specular 1.0 1.0 1.0 1.0 1.0
+
+          texture_unit
+          {
+            texture LFR.png
+            filtering trilinear
+          }
+        }
+      }
+    }
+

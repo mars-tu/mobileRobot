@@ -1,0 +1,221 @@
+<?xml version='1.0'?>
+
+<robot name="robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find robot)/urdf/robot.gazebo" />
+
+  <material name="black">
+    <color rgba="0 0 0 1"/>
+  </material>
+
+  <link name='robot_footprint'> </link>
+
+  <joint name="robot_footprint_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="robot_footprint"/>
+    <child link="robot_body" />
+  </joint>
+
+  <link name='robot_body'>
+    <pose>0 0 0 0 0 0</pose>
+
+    <inertial>
+      <mass value="9"/>
+      <origin xyz="0 0 0" rpy=" 1.5707 0 1.5707"/>
+      <inertia
+          ixx="0.4298" ixy="0" ixz="0"
+          iyy="0.207" iyz="0"
+          izz="0.236"
+      />
+    </inertial>
+
+    <collision name='robot_collision'>
+      <origin xyz="0 0 0" rpy=" 1.5707 0 1.5707"/>
+      <geometry>
+        <!--<box size="1.0 1.0 1.0"/>-->
+        <mesh filename="package://robot/meshes/dingo_for_omni.dae"/>
+      </geometry>
+    </collision>
+
+    <visual name='robot_visual'>
+      <origin xyz="0 0 0" rpy=" 1.5707 0 1.5707"/>
+      <geometry>
+        <mesh filename="package://robot/meshes/dingo_for_omni.dae"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name='left_wheel'>
+    <pose>0 0 0 0 0 0</pose>
+
+    <inertial>
+      <mass value="0.35"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia
+          ixx="0.000225" ixy="0" ixz="0"
+          iyy="0.000225" iyz="0"
+          izz="0.0004375"
+      />
+    </inertial>
+
+    <collision name='left_wheel_collision'>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.015"/>
+      </geometry>
+    </collision>
+
+    <visual name='left_wheel_visual'>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.015"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+  </link>
+    
+  
+  <link name='right_wheel'>
+    <pose>0 0 0 0 0 0</pose>
+
+    <inertial>
+      <mass value="0.35"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia
+          ixx="0.000225" ixy="0" ixz="0"
+          iyy="0.000225" iyz="0"
+          izz="0.0004375"
+      />
+    </inertial>
+
+    <collision name='right_wheel_collision'>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.015"/>
+      </geometry>
+    </collision>
+
+    <visual name='right_wheel_visual'>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.015"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+  </link>
+  
+  <link name='omni_wheel'>
+    <pose>0 0 0 0 0 0</pose>
+
+    <inertial>
+      <mass value="0.35"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia
+          ixx="0.0056" ixy="0" ixz="0"
+          iyy="0.0056" iyz="0"
+          izz="0.0056"
+      />
+    </inertial>
+
+    <collision name='omni_wheel_collision'>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.02"/>
+      </geometry>
+    </collision>
+
+    <visual name='omni_wheel_visual'>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.02"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+  </link>
+  
+  <link name='camera_link'>
+    <pose>0 0 0 0 0 0</pose>
+
+    <inertial>
+      <mass value="0.2"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia
+          ixx="0.000196" ixy="0" ixz="0"
+          iyy="0.0000125875" iyz="0"
+          izz="0.0002044"
+      />
+    </inertial>
+
+    <collision name='camera_link_collision'>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robot/meshes/tracking_camera.dae"/>
+      </geometry>
+    </collision>
+
+    <visual name='camera_link_visual'>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robot/meshes/tracking_camera.dae"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <link name='camera_link_fake'> <!-- To control the face of camera link which will be used as camera, we make an invisible link -->
+  </link>
+
+  <joint type="continuous" name="left_wheel_hinge">
+    <origin xyz="-0.100266 -0.242145 0.03" rpy=" 0 -1.5707 1.5707"/>
+    <child link="left_wheel"/>
+    <parent link="robot_body"/>
+    <axis xyz="0 0 1" rpy="0 0 0"/>
+    <limit effort="10000" velocity="1000"/>
+    <dynamics damping="1.0" friction="1.0"/>
+  </joint>
+
+  <joint type="continuous" name="right_wheel_hinge">
+    <origin xyz="-0.100266 0.242145 0.03" rpy=" 0 -1.5707 1.5707"/>
+    <child link="right_wheel"/>
+    <parent link="robot_body"/>
+    <axis xyz="0 0 1" rpy="0 0 0"/>
+    <limit effort="10000" velocity="1000"/>
+    <dynamics damping="1.0" friction="1.0"/>
+  </joint>
+
+  <joint type="fixed" name="camera_link_hinge">
+    <origin xyz="-0.285635 0.0 0.05051" rpy="-1.57 0 1.57"/>
+    <child link="camera_link"/>
+    <parent link="robot_body"/>
+    <axis xyz="0 0 1" rpy="0 -1.57 0"/>
+    <limit effort="10000" velocity="1000"/>
+    <dynamics damping="1.0" friction="1.0"/>
+  </joint>
+  
+  <joint type="continuous" name="omni_wheel_hinge">
+    <origin xyz="0.233497 -0.000865 0" rpy="0.000212 -0.118296 -0.001802"/>
+    <child link="omni_wheel"/>
+    <parent link="robot_body"/>
+    <axis xyz="0 0 1" rpy="0 0 0"/>
+    <limit effort="10000" velocity="1000"/>
+    <dynamics damping="1.0" friction="1.0"/>
+  </joint>
+  
+  <joint name="camera_fake_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="-1.57 -1.57 3.14"/>
+    <parent link="camera_link"/>
+    <child link="camera_link_fake"/>
+  </joint>
+
+  <gazebo reference="left_wheel">
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="right_wheel">
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="omni_wheel">
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+</robot>
