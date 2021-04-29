@@ -10,7 +10,7 @@ Repository for Mobile Robot made by MARS
 
 ### Setup and launching the simulation environment:-
 
-* Build in your preferred system and source (`source devel/setup.bash`) the workspace
+* Clane the repo, build in your preferred system and source (`source devel/setup.bash`) the workspace
 
 * Command `roslaunch robot robot.launch` will launch the world with robot in an empty gazebo world and planning scene in RViz with TF, camera, robotmodel
 already set in it
