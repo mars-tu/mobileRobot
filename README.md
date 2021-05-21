@@ -6,16 +6,14 @@ Repository for Mobile Robot by MARS, capable of autonomous navigation and transf
 *
 *
 
-## Project Structure:-
-### Electro-mechanical design:
-------------------------
+## Electro-mechanical design:
 
-### ROS Packages:
-------------------------
+## ROS Packages:
 * [Robot package](#robot)
 * [Line Follower package](#line_follower)
 
-  ## robot
+### robot
+------------------
 * This package contains all the files related to robot and its configuration 
 
 ### Setup and launching the simulation environment:-
@@ -25,9 +23,23 @@ Repository for Mobile Robot by MARS, capable of autonomous navigation and transf
 * Command `roslaunch robot robot.launch` will launch the world with robot in an empty gazebo world and planning scene in RViz with TF, camera, robotmodel
 already set in it
 
-  ## line_follower
+### line_follower
+-----------------
 * Contains node `line_follower` to follow a black line on a white background by using camera stream via `sensor_msgs` messages (No openCV).
 * `line_follower.launch` file launches the code for line following, but does not contain the LFR arena itself.
 ##### Steps to add arena given in repository or any other arena made by someone else.
 * Add the `models` folder to your gazebo path (one of the possible pre-set path is `/home/user/.gazebo/models`).
 * After gazebo environment is launched, add your arena from `insert` option and delete the existing ground plane.
+
+## Prerequisites
+* C++14
+* python 2.x
+* Raspberry pi 3B (setup given below)
+#### Note: Hardware prerequisites mentioned in xyz section.
+
+## Setup
+* [Raspi + OS setup](#Setting Up CPU)
+2)
+
+### Setting Up CPU
+------------------
