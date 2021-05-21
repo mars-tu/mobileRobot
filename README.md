@@ -38,8 +38,19 @@ already set in it
 #### Note: Hardware prerequisites mentioned in xyz section.
 
 ## Setup
-* [Raspi + OS setup](#Setting Up CPU)
+* [Raspi + OS setup](#setting-up-cpu)
 2)
 
 ### Setting Up CPU
 ------------------
+#### Installing Ubuntu and ROS on Raspberry pi
+1) [Download](https://cdimage.ubuntu.com/releases/18.04/release/) the Ubuntu image for raspberry pi 3.
+2) Flash the image with preferable software.
+3) Follow the standard ARM installation instructions from [ROS Wiki](https://wiki.ros.org/melodic/Installation/Ubuntu) to install ROS Melodic.
+
+#### Installing basic tools and setting them up
+```
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt autoremove
+```
