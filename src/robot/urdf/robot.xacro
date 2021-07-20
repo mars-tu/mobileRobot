@@ -49,7 +49,7 @@
     <pose>0 0 0 0 0 0</pose>
 
     <inertial>
-      <mass value="0.35"/>
+      <mass value="5.35"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <inertia
           ixx="0.000225" ixy="0" ixz="0"
@@ -79,7 +79,7 @@
     <pose>0 0 0 0 0 0</pose>
 
     <inertial>
-      <mass value="0.35"/>
+      <mass value="5.35"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <inertia
           ixx="0.000225" ixy="0" ixz="0"
@@ -132,6 +132,38 @@
       <material name="black"/>
     </visual>
   </link>
+
+<!-- links for sensors -->
+
+  <link name='hokuyo'>
+    <pose>0 0 0 0 0 0</pose>
+
+    <inertial>
+      <mass value="1e-5"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia
+          ixx="1e-6" ixy="0" ixz="0"
+          iyy="1e-6" iyz="0"
+          izz="1e-6"
+      />
+    </inertial>
+
+    <collision name='LIDAR_collision'>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robot/meshes/hokuyo.dae"/>
+      </geometry>
+    </collision>
+
+    <visual name='LIDAR_visual'>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robot/meshes/hokuyo.dae"/>
+      </geometry>
+    </visual>
+  </link>
+
+
   
   <link name='camera_link'>
     <pose>0 0 0 0 0 0</pose>
@@ -204,6 +236,12 @@
     <origin xyz="0 0 0" rpy="-1.57 -1.57 3.14"/>
     <parent link="camera_link"/>
     <child link="camera_link_fake"/>
+  </joint>
+
+  <joint name="hokuyo_joint" type="fixed">
+    <origin xyz="-0.2 0 0.1" rpy="0 0 0"/>
+    <parent link="robot_body"/>
+    <child link="hokuyo"/>
   </joint>
 
   <gazebo reference="left_wheel">
