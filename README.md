@@ -1,11 +1,19 @@
-# mobileRobot
-Repository for Mobile Robot made by MARS
+# < Name of robot >
+Repository for Mobile Robot by MARS, capable of autonomous navigation and transfer of goods in a high medical-risk environment, thus minimizing human to human interaction.
 
-## Packages:-
+## Key Feature:-
+*
+*
+*
+
+## Electro-mechanical design:
+
+## ROS Packages:
 * [Robot package](#robot)
 * [Line Follower package](#line_follower)
 
-## robot
+### robot
+------------------
 * This package contains all the files related to robot and its configuration 
 
 ### Setup and launching the simulation environment:-
@@ -15,9 +23,34 @@ Repository for Mobile Robot made by MARS
 * Command `roslaunch robot robot.launch` will launch the world with robot in an empty gazebo world and planning scene in RViz with TF, camera, robotmodel
 already set in it
 
-## line_follower
+### line_follower
+-----------------
 * Contains node `line_follower` to follow a black line on a white background by using camera stream via `sensor_msgs` messages (No openCV).
 * `line_follower.launch` file launches the code for line following, but does not contain the LFR arena itself.
 ##### Steps to add arena given in repository or any other arena made by someone else.
 * Add the `models` folder to your gazebo path (one of the possible pre-set path is `/home/user/.gazebo/models`).
 * After gazebo environment is launched, add your arena from `insert` option and delete the existing ground plane.
+
+## Prerequisites
+* C++14
+* python 2.x
+* Raspberry pi 3B (setup given below)
+#### Note: Hardware prerequisites mentioned in xyz section.
+
+## Setup
+* [Raspi + OS setup](#setting-up-cpu)
+2)
+
+### Setting Up CPU
+------------------
+#### Installing Ubuntu and ROS on Raspberry pi
+1) [Download](https://cdimage.ubuntu.com/releases/18.04/release/) the Ubuntu image for raspberry pi 3.
+2) Flash the image with preferable software.
+3) Follow the standard ARM installation instructions from [ROS Wiki](https://wiki.ros.org/melodic/Installation/Ubuntu) to install ROS Melodic.
+
+#### Installing basic tools and setting them up
+```
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt autoremove
+```
