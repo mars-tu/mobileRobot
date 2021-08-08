@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+  <!-- Robot default pose -->
+  <arg name="x" default="0"/>
+  <arg name="y" default="0"/>
+  <arg name="z" default="0"/>
+  <arg name="roll" default="0"/>
+  <arg name="pitch" default="0"/>
+  <arg name="yaw" default="0"/>
+
+  <!-- Launch other relevant files-->
+  <include file="$(find robot)/launch/robot_description.launch"/>
+
+  <!-- World File -->
+  <arg name="world_file" default="$(find robot)/world/hostelM.world"/>
+
+  <!-- Launch Gazebo World -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="use_sim_time" value="true"/>
+    <arg name="debug" value="false"/>
+    <arg name="gui" value="true" />
+    <arg name="world_name" value="$(arg world_file)"/>
+  </include>
+
+  <!-- Spawn Medi bot -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" 
+        args="-urdf -param robot_description -model robot.xacro
+              -x $(arg x) -y $(arg y) -z $(arg z)
+              -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)"/>
+
+  <!-- Launching rviz with config file -->
+  <node pkg="rviz" type="rviz" name="rviz" respawn="false" args="-d $(find robot)/config/rviz_config.rviz"/>
+
+  <!-- Gmapping -->
+  <arg name="scan_topic"  default="/scan" />
+  <arg name="base_frame"  default="robot_body"/>
+  <arg name="odom_frame"  default="odom"/>
+
+  <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+    <param name="base_frame" value="$(arg base_frame)"/>
+    <param name="odom_frame" value="$(arg odom_frame)"/>
+    <param name="map_update_interval" value="5.0"/>
+    <param name="maxUrange" value="10.0"/> <!-- according to our hardware -->
+    <param name="maxRange" value="12.0"/> <!-- MUR < Range range < MR -->
+    <param name="sigma" value="0.05"/> <!-- default -->
+    <param name="kernelSize" value="1"/> <!-- default -->
+    <param name="lstep" value="0.05"/> <!-- default -->
+    <param name="astep" value="0.05"/> <!-- default -->
+    <param name="iterations" value="5"/> <!-- default -->
+    <param name="lsigma" value="0.075"/> <!-- default -->
+    <param name="ogain" value="3.0"/> <!-- default -->
+    <param name="lskip" value="0"/> <!-- default (no need to skip as of now) -->
+    <param name="minimumScore" value="50"/> <!-- Minimum score for considering the outcome of the scan matching good. Can avoid jumping pose estimates in large open spaces when using laser scanners with limited range (e.g. 5m). Scores go up to 600+, try 50 for example when experiencing jumping estimate issues.-->
+    <param name="srr" value="0.01"/> <!-- default (rho/rho) -->
+    <param name="srt" value="0.02"/> <!-- default (theta/theta)-->
+    <param name="str" value="0.01"/> <!-- default (theta/rho)-->
+    <param name="stt" value="0.02"/> <!-- default (theta/theta)-->
+    <param name="linearUpdate" value="0.5"/> <!-- decrease for updates in smaller distance, (robust vs cost) -->
+    <param name="angularUpdate" value="0.436"/> <!-- decrease for updates in smaller angular distance, (robust vs cost) -->
+    <param name="temporalUpdate" value="-1.0"/> <!-- make it non zero (seconds) to achieve time based scan updates -->
+    <param name="resampleThreshold" value="0.5"/> <!-- default -->
+    <param name="particles" value="30"/> <!-- default, (robust vs cost) -->
+
+    <param name="xmin" value="-100.0"/> <!-- Initial map size, default -->
+    <param name="ymin" value="-100.0"/>
+    <param name="xmax" value="100.0"/>
+    <param name="ymax" value="100.0"/>
+
+    <param name="delta" value="0.05"/> <!-- meter per occupancy grip map block (resolution) -->
+    <param name="llsamplerange" value="0.01"/> <!-- default -->
+    <param name="llsamplestep" value="0.01"/> <!-- default -->
+    <param name="lasamplerange" value="0.005"/> <!-- default -->
+    <param name="lasamplestep" value="0.005"/> <!-- default -->
+    <remap from="scan" to="$(arg scan_topic)"/>
+  </node>
+</launch>
