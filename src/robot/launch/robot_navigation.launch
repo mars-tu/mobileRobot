@@ -6,17 +6,12 @@
   <node pkg="tf" type="static_transform_publisher" name="world_to_map" args="0 0 0 0 0 0 world map 50"/>
   <node pkg="tf" type="static_transform_publisher" name="base_link_broadcaster" args="0 0 0.05 0 0 0 base_footprint base_link 50" />
 -->
-  <!-- Launch RViz ====>
-  <include file="$(find urdf_tutorial)/launch/display.launch">
-     <arg name="model" value="$(find nav_stack_body)/urdf/nav_stack.urdf"/>
-     <arg name="rvizconfig" value="$(find nav_stack)/param/nav_stack.rviz"/>
-  </include>
-  -->
+
   <!-- Extended Kalman Filter from robot_pose_ekf Node-->
   <!-- Subscribe: /odom, /imu_data, /vo -->
   <!-- Publish: /robot_pose_ekf/odom_combined -->
 
-<!--  <remap from="odom" to="/base_truth_odom" /> -->
+<!--  <remap from="odom" to="/base_truth_odom" /> 
   <node pkg="robot_pose_ekf" type="robot_pose_ekf" name="robot_pose_ekf">
     <param name="output_frame" value="odom"/>
     <param name="base_footprint_frame" value="base_footprint"/>
@@ -29,7 +24,7 @@
     <param name="debug" value="false"/>
     <param name="self_diagnose" value="false"/>
   </node>
-
+-->
   <!-- Map File -->
   <arg name="map_file" default="$(find robot)/maps/map.yaml"/>
 	
