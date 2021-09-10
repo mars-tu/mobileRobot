@@ -10,8 +10,9 @@
 
   <link name='robot_footprint'> </link>
 
-  <joint name="robot_footprint_joint" type="fixed">
-    <origin xyz="0 0 0" rpy="0 0 0" />
+  <joint name="robot_footprint_joint" type="fixed"> 
+    <origin xyz="0 0 0" rpy="1.57 0 3.1415" />
+<!-- x poits towards back of body, y upwards -->
     <parent link="robot_footprint"/>
     <child link="robot_body" />
   </joint>
@@ -21,7 +22,7 @@
 
     <inertial>
       <mass value="9"/>
-      <origin xyz="0 0 0" rpy=" 1.5707 0 1.5707"/>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
       <inertia
           ixx="0.4298" ixy="0" ixz="0"
           iyy="0.207" iyz="0"
@@ -30,17 +31,17 @@
     </inertial>
 
     <collision name='robot_collision'>
-      <origin xyz="0 0 0" rpy=" 1.5707 0 1.5707"/>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
       <geometry>
         <!--<box size="1.0 1.0 1.0"/>-->
-        <mesh filename="package://robot/meshes/dingo_for_omni.dae"/>
+        <mesh filename="package://robot/meshes/chassis.dae"/>
       </geometry>
     </collision>
 
     <visual name='robot_visual'>
-      <origin xyz="0 0 0" rpy=" 1.5707 0 1.5707"/>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
       <geometry>
-        <mesh filename="package://robot/meshes/dingo_for_omni.dae"/>
+        <mesh filename="package://robot/meshes/chassis.dae"/>
       </geometry>
     </visual>
   </link>
@@ -120,14 +121,14 @@
     <collision name='omni_wheel_collision'>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <sphere radius="0.02"/>
+        <sphere radius="0.045"/>
       </geometry>
     </collision>
 
     <visual name='omni_wheel_visual'>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <sphere radius="0.02"/>
+        <sphere radius="0.045"/>
       </geometry>
       <material name="black"/>
     </visual>
@@ -164,7 +165,7 @@
   </link>
 
 
-  
+  <!--
   <link name='camera_link'>
     <pose>0 0 0 0 0 0</pose>
 
@@ -192,12 +193,13 @@
       </geometry>
     </visual>
   </link>
-
-  <link name='camera_link_fake'> <!-- To control the face of camera link which will be used as camera, we make an invisible link -->
+-->
+ <!-- To control the face of camera link which will be used as camera, we make an invisible link 
+ <link name='camera_link_fake'> 
   </link>
-
+-->
   <joint type="continuous" name="left_wheel_hinge">
-    <origin xyz="-0.100266 -0.242145 0.03" rpy=" 0 -1.5707 1.5707"/>
+    <origin xyz="0 0 0.27" rpy="0 0 0"/>
     <child link="left_wheel"/>
     <parent link="robot_body"/>
     <axis xyz="0 0 1" rpy="0 0 0"/>
@@ -206,14 +208,14 @@
   </joint>
 
   <joint type="continuous" name="right_wheel_hinge">
-    <origin xyz="-0.100266 0.242145 0.03" rpy=" 0 -1.5707 1.5707"/>
+    <origin xyz="0 0 -0.27" rpy="0 0 0"/>
     <child link="right_wheel"/>
     <parent link="robot_body"/>
     <axis xyz="0 0 1" rpy="0 0 0"/>
     <limit effort="10000" velocity="1000"/>
     <dynamics damping="1.0" friction="1.0"/>
   </joint>
-
+<!--
   <joint type="fixed" name="camera_link_hinge">
     <origin xyz="-0.285635 0.0 0.05051" rpy="-1.57 0 1.57"/>
     <child link="camera_link"/>
@@ -222,24 +224,24 @@
     <limit effort="10000" velocity="1000"/>
     <dynamics damping="1.0" friction="1.0"/>
   </joint>
-  
+  -->
   <joint type="continuous" name="omni_wheel_hinge">
-    <origin xyz="0.233497 -0.000865 0" rpy="0.000212 -0.118296 -0.001802"/>
+    <origin xyz="0.233497 0 0" rpy="0.000212 -0.118296 -0.001802"/>
     <child link="omni_wheel"/>
     <parent link="robot_body"/>
     <axis xyz="0 0 1" rpy="0 0 0"/>
     <limit effort="10000" velocity="1000"/>
     <dynamics damping="1.0" friction="1.0"/>
   </joint>
-  
+  <!--
   <joint name="camera_fake_joint" type="fixed">
     <origin xyz="0 0 0" rpy="-1.57 -1.57 3.14"/>
     <parent link="camera_link"/>
     <child link="camera_link_fake"/>
   </joint>
-
+-->
   <joint name="hokuyo_joint" type="fixed">
-    <origin xyz="-0.2 0 0.1" rpy="0 0 3.1415"/>
+    <origin xyz="-0.409 0.07 0" rpy="-1.57 3.14 0"/>
     <parent link="robot_body"/>
     <child link="hokuyo"/>
   </joint>
