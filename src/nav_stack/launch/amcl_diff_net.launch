@@ -5,6 +5,7 @@
 	<remap from="scan" to="/scan"/>
   <!-- Publish scans from best pose at a max of 10 Hz -->
   <param name="odom_model_type" value="diff-corrected"/>
+<!--  <param name="initial_pose_a" value="3.1415"/> -->
   <param name="base_frame_id" value="robot_footprint"/>
   <param name="odom_alpha5" value="0.003"/>
   <param name="transform_tolerance" value="0.2" />
