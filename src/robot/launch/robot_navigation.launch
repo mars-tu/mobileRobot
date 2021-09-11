@@ -42,8 +42,14 @@
   <!-- Publish: /cmd_vel -->
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
 	<remap from="scan" to="/scan"/>
+    <param name="base_global_planner" value="global_planner/GlobalPlanner"/>
+    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/>
+    <param name="GlobalPlanner/visualize_potential" value="true"/>
+    <param name="GlobalPlanner/use_dijkstra" value="false"/>
+    <!--
     <param name="min_vel_x" value="0.1"/>
     <param name="min_in_place_rotational_vel" value="0.4"/>
+    -->
     <rosparam file="$(find nav_stack)/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
     <rosparam file="$(find nav_stack)/param/costmap_common_params.yaml" command="load" ns="local_costmap" />
     <rosparam file="$(find nav_stack)/param/local_costmap_params.yaml" command="load" ns="local_costmap" />
