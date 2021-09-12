@@ -1,0 +1,60 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<launch>
+
+  <!-- Transformation Configuration ... Setting Up the Relationships Between Coordinate Frames 
+  <node pkg="tf" type="static_transform_publisher" name="world_to_map" args="0 0 0 0 0 0 world map 50"/>
+  <node pkg="tf" type="static_transform_publisher" name="base_link_broadcaster" args="0 0 0.05 0 0 0 base_footprint base_link 50" />
+-->
+
+  <!-- Extended Kalman Filter from robot_pose_ekf Node-->
+  <!-- Subscribe: /odom, /imu_data, /vo -->
+  <!-- Publish: /robot_pose_ekf/odom_combined -->
+
+<!--  <remap from="odom" to="/base_truth_odom" /> 
+  <node pkg="robot_pose_ekf" type="robot_pose_ekf" name="robot_pose_ekf">
+    <param name="output_frame" value="odom"/>
+    <param name="base_footprint_frame" value="base_footprint"/>
+    <param name="freq" value="50.0"/>
+    <param name="sensor_timeout" value="1.0"/>
+    <param name="odom_used" value="true"/>
+    <param name="imu_used" value="false"/>
+    <param name="vo_used" value="false"/>
+    <param name="gps_used" value="false"/>
+    <param name="debug" value="false"/>
+    <param name="self_diagnose" value="false"/>
+  </node>
+-->
+  <!-- Map File -->
+  <arg name="map_file" default="$(find robot)/maps/map.yaml"/>
+	
+  <!-- Map Server -->
+  <!-- Publish: /map, /map_metadata -->
+  <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)" />
+	
+  <!-- Add AMCL example for differential drive robots for Localization -->
+  <!-- Subscribe: /scan, /tf, /initialpose, /map -->
+  <!-- Publish: /amcl_pose, /particlecloud, /tf -->
+  <include file="$(find nav_stack)/launch/amcl_diff_net.launch"/>  
+	
+  <!-- Move Base Node -->
+  <!-- Subscribe: /tf, /map, /scan, /odom, /move_base_simple/goal -->
+  <!-- Publish: /cmd_vel -->
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+	<remap from="scan" to="/scan"/>
+    <param name="base_global_planner" value="global_planner/GlobalPlanner"/>
+    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/>
+    <param name="GlobalPlanner/visualize_potential" value="true"/>
+    <param name="GlobalPlanner/use_dijkstra" value="false"/>
+    <!--
+    <param name="min_vel_x" value="0.1"/>
+    <param name="min_in_place_rotational_vel" value="0.4"/>
+    -->
+    <rosparam file="$(find nav_stack)/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find nav_stack)/param/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find nav_stack)/param/local_costmap_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find nav_stack)/param/global_costmap_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find nav_stack)/param/base_local_planner_params.yaml" command="load" />
+  </node>
+
+</launch>

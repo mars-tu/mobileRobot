@@ -1,16 +1,22 @@
-# < Name of robot >
+# Medi Bot
 Repository for Mobile Robot by MARS, capable of autonomous navigation and transfer of goods in a high medical-risk environment, thus minimizing human to human interaction.
 
 ## Key Feature:-
-*
-*
-*
+* Autonomous robot with medical items carrying capacity in highly contagious medical conditions.
+* Uses SLAM and navigation techniques to map/localize and travel in hospital conditions.
+* Interaction with environment (lifts) and people via Iot protocols and UI mounted on the robot respectively (under work).
+* Self sanitizes on Auto-Sanitization stations after custom-set iterations (under work).
 
 ## Electro-mechanical design:
+
+* MediBot Chassis.
+![Image alt text](media/MediBot.jpg?raw=true "MediBot Chassis")
+
 
 ## ROS Packages:
 * [Robot package](#robot)
 * [Line Follower package](#line_follower)
+* [Navigation Stack package](#nav_stack)
 
 ### robot
 ------------------
@@ -20,8 +26,7 @@ Repository for Mobile Robot by MARS, capable of autonomous navigation and transf
 
 * Clone the repo, build in your preferred system and source (`source devel/setup.bash`) the workspace
 
-* Command `roslaunch robot robot.launch` will launch the world with robot in an empty gazebo world and planning scene in RViz with TF, camera, robotmodel
-already set in it
+* Command `roslaunch robot robot.launch` will launch the world with robot in a gazebo world (suitable for easier time with SLAM and navigation) and planning scene in RViz with TF, camera, robotmodel already set in it.
 
 ### line_follower
 -----------------
@@ -30,6 +35,11 @@ already set in it
 ##### Steps to add arena given in repository or any other arena made by someone else.
 * Add the `models` folder to your gazebo path (one of the possible pre-set path is `/home/user/.gazebo/models`).
 * After gazebo environment is launched, add your arena from `insert` option and delete the existing ground plane.
+
+### nav_stack
+------------------
+* This package contains all the files related to ros naviagtion stack used for our robot. 
+* Contains all costmaps and AMCL parameters.
 
 ## Prerequisites
 * C++14
