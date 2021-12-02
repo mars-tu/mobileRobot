@@ -20,7 +20,7 @@ Repository for Mobile Robot by MARS, capable of autonomous navigation and transf
 
 ### robot
 ------------------
-* This package contains all the files related to robot and its configuration 
+* This package contains robot URDF, worlds, maps for navigation. 
 
 ### Setup and launching the simulation environment:-
 
@@ -49,7 +49,7 @@ Repository for Mobile Robot by MARS, capable of autonomous navigation and transf
 
 ## Setup
 * [Raspi + OS setup](#setting-up-cpu)
-2)
+
 
 ### Setting Up CPU
 ------------------
