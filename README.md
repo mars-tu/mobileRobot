@@ -45,6 +45,8 @@ Repository for Mobile Robot by MARS, capable of autonomous navigation and transf
 * C++14
 * python 2.x
 * Raspberry pi 3B (setup given below)
+* ROS Melodic
+
 #### Note: Hardware prerequisites mentioned in xyz section.
 
 ## Setup
