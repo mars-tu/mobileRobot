@@ -40,6 +40,7 @@ Repository for Mobile Robot by MARS, capable of autonomous navigation and transf
 ------------------
 * This package contains all the files related to ros naviagtion stack used for our robot. 
 * Contains all costmaps and AMCL parameters.
+* After robot is lauched, command `roslaunch robot robot_navigation.launch` will start the ros navigation stack and allows the robot to be controlled via waypoints or simple goals.
 
 ## Prerequisites
 * C++14
