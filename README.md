@@ -20,7 +20,7 @@ Repository for Mobile Robot by MARS, capable of autonomous navigation and transf
 
 ### robot
 ------------------
-* This package contains all the files related to robot and its configuration 
+* This package contains robot URDF, worlds, maps for navigation. 
 
 ### Setup and launching the simulation environment:-
 
@@ -40,16 +40,19 @@ Repository for Mobile Robot by MARS, capable of autonomous navigation and transf
 ------------------
 * This package contains all the files related to ros naviagtion stack used for our robot. 
 * Contains all costmaps and AMCL parameters.
+* After robot is lauched, command `roslaunch robot robot_navigation.launch` will start the ros navigation stack and allows the robot to be controlled via waypoints or simple goals.
 
 ## Prerequisites
 * C++14
 * python 2.x
 * Raspberry pi 3B (setup given below)
+* ROS Melodic
+
 #### Note: Hardware prerequisites mentioned in xyz section.
 
 ## Setup
 * [Raspi + OS setup](#setting-up-cpu)
-2)
+
 
 ### Setting Up CPU
 ------------------

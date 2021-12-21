@@ -26,7 +26,7 @@
   </node>
 -->
   <!-- Map File -->
-  <arg name="map_file" default="$(find robot)/maps/map.yaml"/>
+  <arg name="map_file" default="$(find robot)/maps/cos_map.yaml"/>
 	
   <!-- Map Server -->
   <!-- Publish: /map, /map_metadata -->
