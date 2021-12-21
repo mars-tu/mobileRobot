@@ -13,7 +13,7 @@
   <include file="$(find robot)/launch/robot_description.launch"/>
 
   <!-- World File -->
-  <arg name="world_file" default="$(find robot)/world/hostelM.world"/>
+  <arg name="world_file" default="$(find robot)/world/newWorld.world"/>
 
   <!-- Launch Gazebo World -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -25,7 +25,7 @@
 
   <!-- Spawn Medi bot -->
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" 
-        args="-urdf -param robot_description -model robot.xacro
+        args="-urdf -param robot_description -model my_robot.xacro
               -x $(arg x) -y $(arg y) -z $(arg z)
               -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)"/>
 
@@ -34,7 +34,7 @@
 
   <!-- Gmapping -->
   <arg name="scan_topic"  default="/scan" />
-  <arg name="base_frame"  default="robot_body"/>
+  <arg name="base_frame"  default="chassis"/>
   <arg name="odom_frame"  default="odom"/>
 
   <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
