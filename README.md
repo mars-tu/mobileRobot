@@ -3,7 +3,7 @@ Repository for Mobile Robot by MARS, capable of autonomous navigation and transf
 
 ## Key Feature:-
 * Autonomous robot with medical items carrying capacity in highly contagious medical conditions.
-* Uses SLAM and navigation techniques to map/localize and travel in hospital conditions.
+* Uses SLAM and navigation techniques to map/localize and travel in hospital/similar conditions.
 * Interaction with environment (lifts) and people via Iot protocols and UI mounted on the robot respectively (under work).
 * Self sanitizes on Auto-Sanitization stations after custom-set iterations (under work).
 
