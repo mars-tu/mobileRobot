@@ -164,8 +164,8 @@ include_directories(
    ${catkin_LIBRARIES}
  )
 
- add_dependencies(drive_bot line_follower_genrate_messages_cpp)
- add_dependencies(line_follower line_follower_genrate_messages_cpp)
+ add_dependencies(drive_bot line_follower_generate_messages_cpp)
+ add_dependencies(line_follower line_follower_generate_messages_cpp)
 
 
 #############
