@@ -13,7 +13,7 @@
   <include file="$(find robot)/launch/robot_description.launch"/>
 
   <!-- World File -->
-  <arg name="world_file" default="$(find robot)/world/newWorld.world"/>
+  <arg name="world_file" default="$(find robot)/world/new_world.world"/>
 
   <!-- Launch Gazebo World -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -30,11 +30,11 @@
               -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)"/>
 
   <!-- Launching rviz with config file -->
-  <node pkg="rviz" type="rviz" name="rviz" respawn="false" args="-d $(find robot)/config/rviz_config.rviz"/>
+  <node pkg="rviz" type="rviz" name="rviz" respawn="false" args="-d $(find robot)/config/rviz_config_map.rviz"/>
 
   <!-- Gmapping -->
-  <arg name="scan_topic"  default="/scan" />
-  <arg name="base_frame"  default="chassis"/>
+  <arg name="scan_topic"  default="scan" />
+  <arg name="base_frame"  default="robot_footprint"/>
   <arg name="odom_frame"  default="odom"/>
 
   <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
@@ -45,7 +45,7 @@
     <param name="maxRange" value="12.0"/> <!-- MUR < Range range < MR -->
     <param name="sigma" value="0.05"/> <!-- default -->
     <param name="kernelSize" value="1"/> <!-- default -->
-    <param name="lstep" value="0.05"/> <!-- default -->
+    <param name="lstep" value="0.05"/> <!-- default --> 
     <param name="astep" value="0.05"/> <!-- default -->
     <param name="iterations" value="5"/> <!-- default -->
     <param name="lsigma" value="0.075"/> <!-- default -->
